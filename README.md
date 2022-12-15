@@ -1,12 +1,12 @@
 ### K8s Components
 
-K8s official documentation: https://kubernetes.io/docs/concepts/
+- K8s official documentation: https://kubernetes.io/docs/concepts/
 
-Enrypting Secret Data at Rest: https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/
+- Enrypting Secret Data at Rest: https://kubernetes.io/docs/tasks/administer-cluster/encrypt-data/
 
 ### K8s Architecture
 
-K8s Architecture Components: https://kubernetes.io/docs/concepts/overview/components/
+- K8s Architecture Components: https://kubernetes.io/docs/concepts/overview/components/
 
 ### Cluster Architecture
 
