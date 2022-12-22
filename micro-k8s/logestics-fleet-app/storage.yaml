@@ -1,0 +1,38 @@
+# What do we want?
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+spec:
+  # Localstorage
+  storageClassName: mylocalstorage
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+---
+# There is a furthure level of indirection, that config can go into seperate thing
+# How do we want it implemented
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-storage
+spec:
+  # 1-1, Localstorage, exact key value pair should be replicated from PVC or viceversa
+  storageClassName: mylocalstorage
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/some new/directory/structure/"
+    type: DirectoryOrCreate
+# 1-1, I'm going to go for mylocalstorage, and all we have to do is make sure that the exact key value pair is replicated
+# in the specification of the PersistentVolume. Now what's going to happen is, this PersistentVolumeClaim is going to search across
+# the entire cluster for any PersistentVolume it can find, which satisfies the requirement of sufficient storage,
+# the correct access mode, and with a matching label of mylocalstorage.
+# This process is called binding, and it means at run time this PersistentVolumeClaim will be satisfied
+# with this PersistentVolume. And therefore, finally, our mongo pod is going to be
+# associated with this folder on the system.
+# status bound (when you do kubectl get pv/pvc) that means this voulme is in use
