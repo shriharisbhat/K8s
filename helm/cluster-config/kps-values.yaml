@@ -1,0 +1,11 @@
+## Using default values from https://github.com/grafana/helm-charts/blob/main/charts/grafana/values.yaml
+##
+grafana:
+  adminPassword: admin
+
+  ## Passed to grafana subchart and used by servicemonitor below
+  ##
+  service:
+    type: NodePort
+    targetPort: 3000
+    nodePort: 30001
